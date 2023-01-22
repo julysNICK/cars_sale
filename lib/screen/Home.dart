@@ -17,7 +17,7 @@ class _HomeState extends State<Home> {
   }
 
   final _screens = [
-    const Center(child: Text('Home')),
+    const Center(child: Text('Teste')),
     const Center(child: Text('Search')),
     const Center(child: Text('Profile')),
   ];
