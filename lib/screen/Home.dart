@@ -1,3 +1,4 @@
+import 'package:cars_sale/screen/ListCarScreen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeState extends State<Home> {
   }
 
   final _screens = [
-    const Center(child: Text('Teste')),
+    const ListCarScreen(),
     const Center(child: Text('Search')),
     const Center(child: Text('Profile')),
   ];
@@ -26,6 +27,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
       child: Scaffold(
+        body: _screens[_selectedItemBottom],
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _selectedItemBottom,
           onTap: onTapItem,
