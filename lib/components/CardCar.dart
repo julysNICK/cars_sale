@@ -4,6 +4,61 @@ import 'package:flutter/material.dart';
 class CardCar extends StatelessWidget {
   final Car? car;
   const CardCar({super.key, this.car});
+  Future _showDialog(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Fazer Proposta'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Text('Deseja fazer uma proposta para esse carro?'),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 35,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Nome',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 35,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'valor',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Confirmar'),
+              ),
+            ],
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,7 +183,9 @@ class CardCar extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    _showDialog(context);
+                  },
                   child: const Text(
                     'Fazer Proposta',
                     style: TextStyle(
