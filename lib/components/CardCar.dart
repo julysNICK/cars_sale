@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class CardCar extends StatelessWidget {
   final Car? car;
-  const CardCar({super.key, this.car});
+  final bool isButtonVisible;
+  const CardCar({super.key, this.car, this.isButtonVisible = true});
   Future _showDialog(BuildContext context) async {
     return showDialog(
         context: context,
@@ -60,142 +61,156 @@ class CardCar extends StatelessWidget {
         });
   }
 
+  Widget _buildButton(BuildContext context,
+      {String TextName = 'Fazer Proposta'}) {
+    return TextButton(
+      onPressed: () {
+        _showDialog(context);
+      },
+      child: Text(
+        TextName,
+        style: const TextStyle(
+          color: Colors.black,
+        ),
+      ),
+    );
+  }
+
+  _buildButtonVisibility(BuildContext context) {
+    if (isButtonVisible) {
+      return _buildButton(context);
+    } else {
+      return _buildButton(context, TextName: 'Apagar');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     print('CardCar: ${car!.getImage}');
     return GestureDetector(
-        onTap: () {
-          print('Card tapped');
-        },
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                Image.network(
-                  car!.getImage ?? '',
-                  height: 220.0,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+      onTap: () {
+        print('Card tapped');
+      },
+      child: Column(
+        children: [
+          Stack(
+            children: [
+              Image.network(
+                car!.getImage ?? '',
+                height: 220.0,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Padding(
+                padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
+                child: Center(
+                  child: Text(
+                    'Ficha Técnica',
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ],
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(0, 30, 0, 20),
-                  child: Center(
-                    child: Text(
-                      'Ficha Técnica',
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Modelo:',
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Modelo:',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    Text(
+                      'R\$ Toyota Corolla',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        'R\$ Toyota Corolla',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Ano:',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        '2010',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Cor:',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'Vermelho',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
-                        'Preço:',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        'R\$ 20.000,00',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    _showDialog(context);
-                  },
-                  child: const Text(
-                    'Fazer Proposta',
-                    style: TextStyle(
-                      color: Colors.black,
                     ),
-                  ),
-                )
-              ],
-            )
-          ],
-        ));
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Ano:',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '2010',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Cor:',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Vermelho',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    Text(
+                      'Preço:',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'R\$ 20.000,00',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              _buildButtonVisibility(context),
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

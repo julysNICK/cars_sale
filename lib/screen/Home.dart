@@ -1,4 +1,5 @@
 import 'package:cars_sale/screen/ListCarScreen.dart';
+import 'package:cars_sale/screen/PublicationScreen.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeState extends State<Home> {
 
   final _screens = [
     const ListCarScreen(),
-    const Center(child: Text('Search')),
+    const PublicationScreen(),
     const Center(child: Text('Profile')),
   ];
 
@@ -37,8 +38,8 @@ class _HomeState extends State<Home> {
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
+              icon: Icon(Icons.garage),
+              label: 'My publication',
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
