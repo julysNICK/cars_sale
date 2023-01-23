@@ -1,19 +1,126 @@
-import 'package:cars_sale/screen/RegisterScreen.dart';
+import 'package:cars_sale/screen/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool rememberMe = false;
+
   void _navigateToPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  Widget buildFirstName() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'First Name',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'OpenSans',
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 60.0,
+          child: const TextField(
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+              hintText: 'Enter your First Name',
+              hintStyle: TextStyle(
+                color: Colors.black38,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget buildLastName() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Last Name',
+          style: TextStyle(
+            color: Colors.white,
+            fontFamily: 'OpenSans',
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          height: 60.0,
+          child: const TextField(
+            keyboardType: TextInputType.text,
+            style: TextStyle(
+              color: Colors.black,
+              fontFamily: 'OpenSans',
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.person,
+                color: Colors.black,
+              ),
+              hintText: 'Enter your Last Name',
+              hintStyle: TextStyle(
+                color: Colors.black38,
+                fontFamily: 'OpenSans',
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -123,55 +230,60 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget buildForgotPasswordBtn() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: TextButton(
-        onPressed: () => print('Forgot Password Button Pressed'),
-        child: const Text(
-          'Forgot Password?',
+  Widget buildConfirmPassword() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Confirm Password',
           style: TextStyle(
             color: Colors.white,
-            fontWeight: FontWeight.bold,
             fontFamily: 'OpenSans',
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
           ),
         ),
-      ),
-    );
-  }
-
-  Widget buildRemenberCb() {
-    return SizedBox(
-      height: 20.0,
-      child: Row(
-        children: [
-          Theme(
-            data: ThemeData(unselectedWidgetColor: Colors.white),
-            child: Checkbox(
-              value: rememberMe,
-              checkColor: Colors.green,
-              activeColor: Colors.white,
-              onChanged: (value) {
-                setState(() {
-                  rememberMe = value!;
-                });
-              },
-            ),
+        const SizedBox(height: 10.0),
+        Container(
+          alignment: Alignment.centerLeft,
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black12,
+                blurRadius: 6.0,
+                offset: Offset(0, 2),
+              ),
+            ],
           ),
-          const Text(
-            'Lembrar-me',
+          height: 60.0,
+          child: const TextField(
+            obscureText: true,
             style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+              color: Colors.black,
               fontFamily: 'OpenSans',
             ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(
+                Icons.lock,
+                color: Colors.black,
+              ),
+              hintText: 'Confirm your password',
+              hintStyle: TextStyle(
+                color: Colors.black38,
+                fontFamily: 'OpenSans',
+              ),
+            ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
-  Widget buildLoginBtn() {
+  Widget buildRegisterBtn() {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -198,14 +310,14 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget buildSignUpBtn() {
+  Widget buildSignInBtn() {
     return GestureDetector(
-      onTap: () => _navigateToPage(context, const RegisterScreen()),
+      onTap: () => _navigateToPage(context, const LoginScreen()),
       child: RichText(
         text: const TextSpan(
           children: [
             TextSpan(
-              text: 'Não tem uma conta?',
+              text: 'Já possui conta?',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -213,7 +325,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
             TextSpan(
-              text: ' Cadastre-se',
+              text: ' faça seu login',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 18.0,
@@ -256,13 +368,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     physics: const AlwaysScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 25.0,
-                      vertical: 120.0,
+                      vertical: 50.0,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Text(
-                          'Login',
+                          'Registrar-se',
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'OpenSans',
@@ -283,17 +395,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         const SizedBox(
-                          height: 50.0,
+                          height: 20.0,
+                        ),
+                        buildFirstName(),
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        buildLastName(),
+                        const SizedBox(
+                          height: 15.0,
                         ),
                         buildEmail(),
                         const SizedBox(
-                          height: 50.0,
+                          height: 15.0,
                         ),
                         buildPassword(),
-                        buildForgotPasswordBtn(),
-                        buildRemenberCb(),
-                        buildLoginBtn(),
-                        buildSignUpBtn()
+                        const SizedBox(
+                          height: 15.0,
+                        ),
+                        buildConfirmPassword(),
+                        buildRegisterBtn(),
+                        buildSignInBtn()
                       ],
                     ),
                   ),
