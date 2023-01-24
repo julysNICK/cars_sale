@@ -1,3 +1,4 @@
+import 'package:cars_sale/controllers/auth_controller.dart';
 import 'package:cars_sale/screen/LoginScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,6 +12,7 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   bool rememberMe = false;
+  AuthController authController = AuthController();
 
   void _navigateToPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
@@ -46,13 +48,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputFirstName,
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -99,13 +102,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputLastName,
             keyboardType: TextInputType.text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -152,13 +156,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputEmail,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -205,13 +210,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputPassword,
             obscureText: true,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -258,13 +264,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputConfirmPassword,
             obscureText: true,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -295,9 +302,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => authController
+            .registerUser()
+            .then((value) => _navigateToPage(context, const LoginScreen())),
         child: const Text(
-          'LOGIN',
+          'Registrar',
           style: TextStyle(
             color: Color(0xFF527DAA),
             letterSpacing: 1.5,

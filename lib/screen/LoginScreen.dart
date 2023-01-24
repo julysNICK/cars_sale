@@ -1,3 +1,5 @@
+import 'package:cars_sale/controllers/auth_controller.dart';
+import 'package:cars_sale/screen/Home.dart';
 import 'package:cars_sale/screen/RegisterScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,7 +12,29 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthController authController = AuthController();
+
   bool rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+    checkedLogin().then((value) {
+      if (value) {
+        _navigateToPage(context, const Home());
+      }
+    });
+  }
+
+  Future<bool> checkedLogin() async {
+    String? token = await authController.getToken();
+
+    if (token != null) {
+      return true;
+    }
+    return false;
+  }
+
   void _navigateToPage(BuildContext context, Widget page) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (context) => page),
@@ -45,13 +69,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputEmail,
             keyboardType: TextInputType.emailAddress,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -98,13 +123,14 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
           height: 60.0,
-          child: const TextField(
+          child: TextField(
+            controller: authController.controllerInputPassword,
             obscureText: true,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontFamily: 'OpenSans',
             ),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               border: InputBorder.none,
               contentPadding: EdgeInsets.only(top: 14.0),
               prefixIcon: Icon(
@@ -148,12 +174,12 @@ class _LoginScreenState extends State<LoginScreen> {
           Theme(
             data: ThemeData(unselectedWidgetColor: Colors.white),
             child: Checkbox(
-              value: rememberMe,
+              value: authController.remenberMe,
               checkColor: Colors.green,
               activeColor: Colors.white,
               onChanged: (value) {
                 setState(() {
-                  rememberMe = value!;
+                  authController.remenberMe = value!;
                 });
               },
             ),
@@ -183,7 +209,7 @@ class _LoginScreenState extends State<LoginScreen> {
             borderRadius: BorderRadius.circular(30.0),
           ),
         ),
-        onPressed: () => print('Login Button Pressed'),
+        onPressed: () => authController.loginUser(context, const Home()),
         child: const Text(
           'LOGIN',
           style: TextStyle(
