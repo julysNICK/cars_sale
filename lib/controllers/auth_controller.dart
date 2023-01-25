@@ -41,6 +41,13 @@ class AuthController {
         .then((value) => {_navigateToPage(context, screeName)});
   }
 
+  _verifyRemenberMe(token, context, screeName) async {
+    if (remenberMe) {
+      await _saveToken(token, context, screeName);
+    }
+    return;
+  }
+
   Future loginUser(context, screeName) async {
     const apiUrl = "http://192.168.0.69:8080/api/v1/login";
 
@@ -52,7 +59,7 @@ class AuthController {
 
     if (response.statusCode == 200) {
       var loginArr = json.decode(response.body);
-      await _saveToken(loginArr['token'], context, screeName);
+      await _verifyRemenberMe(loginArr['token'], context, screeName);
     } else {
       print(response.statusCode);
     }
