@@ -1,4 +1,5 @@
 import 'package:cars_sale/controllers/auth_controller.dart';
+import 'package:cars_sale/controllers/cars_controller.dart';
 import 'package:cars_sale/screen/ListCarScreen.dart';
 import 'package:cars_sale/screen/PublicationScreen.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int _selectedItemBottom = 0;
   AuthController authController = AuthController();
+  CarsController carsController = CarsController();
+
   @override
   onTapItem(int index) {
     setState(() {

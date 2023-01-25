@@ -1,8 +1,8 @@
-import 'package:cars_sale/class/Car.dart';
 import 'package:flutter/material.dart';
 
 class CardCar extends StatelessWidget {
-  final Car? car;
+  final dynamic car;
+
   final bool isButtonVisible;
   const CardCar({super.key, this.car, this.isButtonVisible = true});
   Future _showDialog(BuildContext context) async {
@@ -86,7 +86,8 @@ class CardCar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('CardCar: ${car!.getImage}');
+    print(car['CarsInfo']['Car']['image']);
+
     return GestureDetector(
       onTap: () {
         print('Card tapped');
@@ -96,7 +97,7 @@ class CardCar extends StatelessWidget {
           Stack(
             children: [
               Image.network(
-                car!.getImage ?? '',
+                car['CarsInfo']['Car']['image'] ?? '',
                 height: 220.0,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -122,8 +123,8 @@ class CardCar extends StatelessWidget {
                 padding: const EdgeInsets.all(20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Modelo:',
                       style: TextStyle(
                         fontSize: 20.0,
@@ -131,8 +132,8 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'R\$ Toyota Corolla',
-                      style: TextStyle(
+                      car['CarsInfo']['Car']['model'].toString(),
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -144,8 +145,8 @@ class CardCar extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Ano:',
                       style: TextStyle(
                         fontSize: 20.0,
@@ -153,8 +154,8 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '2010',
-                      style: TextStyle(
+                      car['CarsInfo']['Car']['year'].toString(),
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -188,8 +189,8 @@ class CardCar extends StatelessWidget {
                 padding: const EdgeInsets.all(10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Preço:',
                       style: TextStyle(
                         fontSize: 20.0,
@@ -197,8 +198,8 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'R\$ 20.000,00',
-                      style: TextStyle(
+                      'R\$ ${car['CarsInfo']['Car']['price']},00',
+                      style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
