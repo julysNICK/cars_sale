@@ -41,6 +41,10 @@ class AuthController {
         .then((value) => {_navigateToPage(context, screeName)});
   }
 
+  Future saveToken(token) async {
+    await storage.write(key: 'token', value: token);
+  }
+
   _verifyRemenberMe(token, context, screeName) async {
     if (remenberMe) {
       await _saveToken(token, context, screeName);

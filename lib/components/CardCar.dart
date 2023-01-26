@@ -1,10 +1,11 @@
+import 'package:cars_sale/class/CarInfo.dart';
 import 'package:flutter/material.dart';
 
 class CardCar extends StatelessWidget {
-  final dynamic car;
+  CarInfo1 car = CarInfo1();
 
   final bool isButtonVisible;
-  const CardCar({super.key, this.car, this.isButtonVisible = true});
+  CardCar({super.key, required this.car, this.isButtonVisible = true});
   Future _showDialog(BuildContext context) async {
     return showDialog(
         context: context,
@@ -86,7 +87,7 @@ class CardCar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(car['CarsInfo']['Car']['image']);
+    print(car.car?.image.toString());
 
     return GestureDetector(
       onTap: () {
@@ -97,7 +98,7 @@ class CardCar extends StatelessWidget {
           Stack(
             children: [
               Image.network(
-                car['CarsInfo']['Car']['image'] ?? '',
+                car.car?.image.toString() ?? '',
                 height: 220.0,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -132,7 +133,7 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      car['CarsInfo']['Car']['model'].toString(),
+                      car.car?.model.toString() ?? '',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -154,7 +155,7 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      car['CarsInfo']['Car']['year'].toString(),
+                      car.car?.year.toString() ?? '',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -198,7 +199,7 @@ class CardCar extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'R\$ ${car['CarsInfo']['Car']['price']},00',
+                      'R\$ ${car.car?.price},00',
                       style: const TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,

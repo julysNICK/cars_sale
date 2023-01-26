@@ -67,17 +67,25 @@ class User {
 
 class CarInfo1 {
   final CarExample? car;
+  final List<CarExample>? cars;
   final User? user;
 
   CarInfo1({
     this.car,
     this.user,
+    this.cars,
   });
 
   factory CarInfo1.fromJson(Map<String, dynamic> json) {
     return CarInfo1(
       car: CarExample.fromJson(json['CarsInfo']['Car']),
       user: User.fromJson(json['CarsInfo']['User']),
+    );
+  }
+
+  factory CarInfo1.fromJsonList(dynamic json) {
+    return CarInfo1(
+      cars: (json['Cars'] as List).map((e) => CarExample.fromJson(e)).toList(),
     );
   }
 }

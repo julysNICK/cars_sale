@@ -1,3 +1,4 @@
+import 'package:cars_sale/class/CarInfo.dart';
 import 'package:cars_sale/components/CardCar.dart';
 import 'package:cars_sale/controllers/cars_controller.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class ListCarScreen extends StatefulWidget {
 
 class _ListCarScreenState extends State<ListCarScreen> {
   CarsController carsController = CarsController();
-  List? carsInfo = [];
+  List<CarInfo1>? carsInfo = [];
 
   @override
   void initState() {
@@ -35,7 +36,7 @@ class _ListCarScreenState extends State<ListCarScreen> {
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                final car = carsInfo![index];
+                final CarInfo1 car = carsInfo![index];
                 return Card(
                     child: CardCar(
                   car: car,
