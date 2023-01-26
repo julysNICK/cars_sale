@@ -88,4 +88,11 @@ class CarInfo1 {
       cars: (json['Cars'] as List).map((e) => CarExample.fromJson(e)).toList(),
     );
   }
+
+  factory CarInfo1.fromJsonOnlyCar(Map<String, dynamic> json) {
+    print(json);
+    return CarInfo1(
+      car: CarExample.fromJson(json),
+    );
+  }
 }

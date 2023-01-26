@@ -70,8 +70,8 @@ class CarsController {
       var response =
           await http.get(Uri.parse('$_url/cars/my'), headers: headers);
       if (response.statusCode == 200) {
-        carsResult = (json.decode(response.body) as List).map((e) {
-          return CarInfo1.fromJsonList(e);
+        carsResult = (json.decode(response.body)['Cars'] as List).map((e) {
+          return CarInfo1.fromJsonOnlyCar(e);
         }).toList();
 
         return carsResult;
