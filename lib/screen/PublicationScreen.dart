@@ -40,6 +40,7 @@ class _PublicationScreenState extends State<PublicationScreen> {
                   child: CardCar(
                 car: car,
                 isButtonVisible: false,
+                isDeleteButtonPopupVisible: true,
               ));
             }, childCount: carsInfo.length)),
           ),

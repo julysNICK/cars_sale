@@ -5,7 +5,12 @@ class CardCar extends StatelessWidget {
   CarInfo1 car = CarInfo1();
 
   final bool isButtonVisible;
-  CardCar({super.key, required this.car, this.isButtonVisible = true});
+  final bool isDeleteButtonPopupVisible;
+  CardCar(
+      {super.key,
+      required this.car,
+      this.isButtonVisible = true,
+      this.isDeleteButtonPopupVisible = false});
   Future _showDialog(BuildContext context) async {
     return showDialog(
         context: context,
@@ -62,11 +67,49 @@ class CardCar extends StatelessWidget {
         });
   }
 
+  Future _showDialogDelete(BuildContext context) async {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Apagar'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Text('Deseja apagar esse carro?'),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancelar'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Confirmar'),
+              ),
+            ],
+          );
+        });
+  }
+
+  showPopupDIalogOrDelete(BuildContext context) {
+    if (isDeleteButtonPopupVisible) {
+      _showDialogDelete(context);
+    } else {
+      _showDialog(context);
+    }
+  }
+
   Widget _buildButton(BuildContext context,
       {String TextName = 'Fazer Proposta'}) {
     return TextButton(
       onPressed: () {
-        _showDialog(context);
+        showPopupDIalogOrDelete(context);
       },
       child: Text(
         TextName,
