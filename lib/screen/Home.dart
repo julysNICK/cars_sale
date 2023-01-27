@@ -1,5 +1,6 @@
 import 'package:cars_sale/controllers/auth_controller.dart';
 import 'package:cars_sale/controllers/cars_controller.dart';
+import 'package:cars_sale/screen/AddCar.dart';
 import 'package:cars_sale/screen/ListCarScreen.dart';
 import 'package:cars_sale/screen/PublicationScreen.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,8 @@ class _HomeState extends State<Home> {
 
   final _screens = [
     const ListCarScreen(),
+    const AddCar(),
     const PublicationScreen(),
-    const Center(child: Text('Profile')),
   ];
 
   @override
@@ -35,20 +36,32 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         body: _screens[_selectedItemBottom],
         bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12,
+          unselectedFontSize: 12,
+          elevation: 0,
           currentIndex: _selectedItemBottom,
           onTap: onTapItem,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(
+                Icons.home,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.garage),
-              label: 'My publication',
+              icon: Icon(
+                Icons.add_circle_outline,
+                size: 40,
+              ),
+              label: 'Adicionar carro',
+              tooltip: 'Adicionar carro',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
+              icon: Icon(
+                Icons.garage,
+              ),
+              label: 'My publication',
             ),
           ],
         ),
