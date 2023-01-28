@@ -172,4 +172,34 @@ class CarsController {
       print(e);
     }
   }
+
+  Future deleteCar(String id) async {
+    try {
+      String? token = await authController.getToken();
+      Map<String, String> headers = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        "Authorization": "Bearer $token"
+      };
+      var response =
+          await http.delete(Uri.parse('${_url}car/$id'), headers: headers);
+
+      if (response.statusCode == 201) {
+        clearFields();
+      } else if (response.statusCode == 401) {
+        var newToken = await _renewToken(token!);
+        authController.saveToken(newToken);
+
+        if (!newToken.isEmpty) {
+          return getMyCars();
+        }
+
+        return;
+      } else {
+        print(response.statusCode);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

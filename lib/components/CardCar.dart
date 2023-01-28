@@ -1,9 +1,10 @@
 import 'package:cars_sale/class/CarInfo.dart';
+import 'package:cars_sale/controllers/cars_controller.dart';
 import 'package:flutter/material.dart';
 
 class CardCar extends StatelessWidget {
   CarInfo1 car = CarInfo1();
-
+  CarsController carsController = CarsController();
   final bool isButtonVisible;
   final bool isDeleteButtonPopupVisible;
   CardCar(
@@ -67,7 +68,8 @@ class CardCar extends StatelessWidget {
         });
   }
 
-  Future _showDialogDelete(BuildContext context) async {
+  Future _showDialogDelete(BuildContext context, String id) async {
+    print(id);
     return showDialog(
         context: context,
         builder: (context) {
@@ -88,7 +90,9 @@ class CardCar extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  carsController
+                      .deleteCar(id)
+                      .then((value) => Navigator.of(context).pop());
                 },
                 child: const Text('Confirmar'),
               ),
@@ -97,19 +101,19 @@ class CardCar extends StatelessWidget {
         });
   }
 
-  showPopupDIalogOrDelete(BuildContext context) {
+  showPopupDIalogOrDelete(BuildContext context, String id) {
     if (isDeleteButtonPopupVisible) {
-      _showDialogDelete(context);
+      _showDialogDelete(context, id);
     } else {
       _showDialog(context);
     }
   }
 
-  Widget _buildButton(BuildContext context,
+  Widget _buildButton(BuildContext context, String id,
       {String TextName = 'Fazer Proposta'}) {
     return TextButton(
       onPressed: () {
-        showPopupDIalogOrDelete(context);
+        showPopupDIalogOrDelete(context, id);
       },
       child: Text(
         TextName,
@@ -120,11 +124,11 @@ class CardCar extends StatelessWidget {
     );
   }
 
-  _buildButtonVisibility(BuildContext context) {
+  _buildButtonVisibility(BuildContext context, String id) {
     if (isButtonVisible) {
-      return _buildButton(context);
+      return _buildButton(context, id);
     } else {
-      return _buildButton(context, TextName: 'Apagar');
+      return _buildButton(context, TextName: 'Apagar', id);
     }
   }
 
@@ -251,7 +255,7 @@ class CardCar extends StatelessWidget {
                   ],
                 ),
               ),
-              _buildButtonVisibility(context),
+              _buildButtonVisibility(context, car.car?.id.toString() ?? ''),
             ],
           )
         ],
