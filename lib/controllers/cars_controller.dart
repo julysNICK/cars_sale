@@ -16,6 +16,10 @@ class CarsController {
   TextEditingController controllerInputReasonToSell = TextEditingController();
   TextEditingController controllerInputImage = TextEditingController();
 
+  num _transformStringToNum(String value) {
+    return num.parse(value.replaceAll(RegExp(r'[^\d]'), ''));
+  }
+
   bool _verifyEmptyFields() {
     if (controllerInputMake.text.isEmpty ||
         controllerInputModel.text.isEmpty ||
@@ -142,7 +146,7 @@ class CarsController {
             "make": controllerInputMake.text,
             "model": controllerInputModel.text,
             "year": controllerInputYear.text,
-            "price": _convertStringToNum(controllerInputPrice.text),
+            "price": _transformStringToNum(controllerInputPrice.text),
             "reasonToSell": controllerInputReasonToSell.text,
             "image": controllerInputImage.text,
             "isSold": false,

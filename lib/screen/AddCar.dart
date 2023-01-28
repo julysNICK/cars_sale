@@ -1,4 +1,5 @@
 import 'package:cars_sale/controllers/cars_controller.dart';
+import 'package:cars_sale/utils/PriceFormatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -173,6 +174,10 @@ class _AddCarState extends State<AddCar> {
                 fontFamily: 'OpenSans',
               ),
             ),
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              PriceFormatter()
+            ],
           ),
         ),
       ],
